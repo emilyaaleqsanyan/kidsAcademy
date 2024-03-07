@@ -35,6 +35,7 @@ public class Course {
 
     private double price;
 
+
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
