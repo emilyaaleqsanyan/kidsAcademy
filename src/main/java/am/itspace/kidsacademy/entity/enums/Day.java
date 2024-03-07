@@ -1,4 +1,4 @@
-package am.itspace.kidsacademy.entity.enams;
+package am.itspace.kidsacademy.entity.enums;
 
 public enum Day {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY

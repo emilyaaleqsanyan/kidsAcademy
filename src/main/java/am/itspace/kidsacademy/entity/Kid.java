@@ -1,22 +1,19 @@
 package am.itspace.kidsacademy.entity;
 
 
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
 
 @Entity
 @EqualsAndHashCode
-@Table(name = "teacher")
-public class Teacher {
-
+@Table(name = "kid")
+public class Kid {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,23 +23,24 @@ public class Teacher {
 
     private String surname;
 
+    private int age;
+
     @ManyToOne
     @JoinColumn(name = "courseId")
     private Course course;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "teacher")
-    private Photo photo;
-
-    private String information;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
 
     @Override
     public String toString() {
-        return "Teacher{" +
+        return "Kid{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", information='" + information + '\'' +
+                ", age=" + age +
                 '}';
     }
 }

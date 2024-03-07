@@ -1,10 +1,17 @@
 package am.itspace.kidsacademy.entity;
 
-import jakarta.persistence.*;
-import lombok.Data;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import lombok.EqualsAndHashCode;
 
 @Entity
-@Data
+@EqualsAndHashCode
 @Table(name = "photo")
 public class Photo {
 
@@ -20,4 +27,12 @@ public class Photo {
     @JoinColumn(name = "teacherId")
     private Teacher teacher;
 
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                '}';
+    }
 }
