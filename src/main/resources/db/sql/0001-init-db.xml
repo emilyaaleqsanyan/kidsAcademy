@@ -1,0 +1,85 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="0001-init-db" author="ealeqsanyan">
+        <createTable tableName="course">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="course_name" type="varchar(255)"/>
+            <column name="start_date" type="date"/>
+            <column name="years_old" type="tinyint"/>
+            <column name="available_seats" type="tinyint"/>
+            <column name="duration" type="double"/>
+            <column name="price" type="double"/>
+            <column name="currency" type="ENUM('amd','usd','eur')"/>
+        </createTable>
+        <createTable tableName="teacher">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="surname" type="varchar(255)"/>
+            <column name="pic_name" type="varchar(255)"/>
+            <column name="course_id" type="int(11)">
+                <constraints foreignKeyName="teacher_course_id_fk"  references="course(id)" nullable="false"/>
+            </column>
+            <column name="information" type="text"/>
+
+        </createTable>
+
+        <createTable tableName="user">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="surname" type="varchar(255)"/>
+            <column name="email" type="varchar(255)"/>
+            <column name="password" type="varchar(255)"/>
+            <column name="user_type" type="ENUM('user','admin')"/>
+        </createTable>
+
+        <createTable tableName="kid">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="surname" type="varchar(255)"/>
+            <column name="age" type="tinyint"/>
+            <column name="course_id" type="int(11)">
+                <constraints foreignKeyName="kid_course_id_fk"  references="course(id)" nullable="false"/>
+            </column>
+            <column name="user_id" type="int(11)">
+                <constraints foreignKeyName="kid_user_id_fk" references="user(id)" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="photo">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="path" type="varchar(255)"/>
+            <column name="teacher_id" type="int(11)">
+                <constraints foreignKeyName="photo_teacher_id_fk" references="teacher(id)" nullable="false"/>
+            </column>
+        </createTable>
+
+
+
+        <createTable tableName="course_schedule">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="course_start" type="timestamp"/>
+            <column name="course_end" type="timestamp"/>
+            <column name="day" type="ENUM('monday','tuesday','wednesday','thursday','friday')"/>
+            <column name="course_id" type="int(11)">
+                <constraints foreignKeyName="course_schedule_course_id_fk" references="course(id)" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
