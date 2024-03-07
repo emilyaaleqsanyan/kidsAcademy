@@ -1,14 +1,20 @@
 package am.itspace.kidsacademy.entity;
 
-import am.itspace.kidsacademy.entity.enams.Currency;
-import jakarta.persistence.*;
-import lombok.Data;
+import am.itspace.kidsacademy.entity.enums.Currency;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Entity
-@Data
+@EqualsAndHashCode
 @Table(name = "course")
 public class Course {
 
@@ -19,7 +25,7 @@ public class Course {
     private String courseName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date start_date;
+    private Date startDate;
 
     private int yearsOld;
 
@@ -31,4 +37,19 @@ public class Course {
 
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                ", startDate=" + startDate +
+                ", yearsOld=" + yearsOld +
+                ", availableSeats=" + availableSeats +
+                ", duration=" + duration +
+                ", price=" + price +
+                ", currency=" + currency +
+                '}';
+    }
 }
