@@ -1,11 +1,12 @@
 package am.itspace.kidsacademy.entity;
 
 import am.itspace.kidsacademy.entity.enums.Currency;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import lombok.EqualsAndHashCode;
@@ -37,6 +38,9 @@ public class Course {
 
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+   @ManyToOne
+    private CourseSchedule courseSchedule;
 
 
     @Override

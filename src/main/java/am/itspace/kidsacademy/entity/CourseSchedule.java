@@ -1,17 +1,22 @@
 package am.itspace.kidsacademy.entity;
 
 import am.itspace.kidsacademy.entity.enums.Day;
-import lombok.EqualsAndHashCode;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.EnumType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Id;
+
+import java.util.List;
+
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalTime;
+
 
 @Entity
 @EqualsAndHashCode
@@ -31,8 +36,8 @@ public class CourseSchedule {
     @Enumerated(EnumType.STRING)
     private Day day;
 
-    @ManyToOne
-    private Course course;
+    @OneToMany(mappedBy = "courseSchedule", cascade = CascadeType.ALL)
+    private List<Course> courses;
 
     @Override
     public String toString() {
