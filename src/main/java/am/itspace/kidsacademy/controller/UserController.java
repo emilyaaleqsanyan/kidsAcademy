@@ -6,7 +6,6 @@ import am.itspace.kidsacademy.security.SpringUser;
 import am.itspace.kidsacademy.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserService userService;
-
 
     private final PasswordEncoder passwordEncoder;
 
@@ -48,7 +46,6 @@ public class UserController {
     @GetMapping("/loginPage")
     public String loginPage(@AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
         if (springUser == null) {
-
             return "loginPage";
         }
         return "redirect:/";
@@ -59,7 +56,7 @@ public class UserController {
         User user = springUser.getUser();
         if (user.getUserType() == UserType.ADMIN) {
             return "redirect:/admin/home";
-        } else{
+        } else {
             return "redirect:/";
         }
     }

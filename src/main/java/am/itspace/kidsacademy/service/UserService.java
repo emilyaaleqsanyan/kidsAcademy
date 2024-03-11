@@ -1,17 +1,16 @@
 package am.itspace.kidsacademy.service;
 
 import am.itspace.kidsacademy.entity.User;
-
 import java.util.List;
 
-    public interface UserService {
+public interface UserService {
 
-        User save(User user);
+    User save(User user);
 
-        List<User> findAll();
+    List<User> findAll();
 
-        User findByEmail(String email);
+    User findByEmail(String email);
 
-    }
+}
 
 
