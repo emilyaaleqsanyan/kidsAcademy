@@ -27,7 +27,7 @@ public class UserController {
         if (msg != null && !msg.isEmpty()) {
             modelMap.addAttribute("msg", msg);
         }
-        return "registerPage";
+        return "user/loginPage";
     }
 
     @PostMapping("/user/register")
@@ -44,9 +44,9 @@ public class UserController {
     }
 
     @GetMapping("/loginPage")
-    public String loginPage(@AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
+    public String loginPage(@AuthenticationPrincipal SpringUser springUser) {
         if (springUser == null) {
-            return "loginPage";
+            return "user/loginPage";
         }
         return "redirect:/";
     }
@@ -60,6 +60,7 @@ public class UserController {
             return "redirect:/";
         }
     }
+
 
 
 }
