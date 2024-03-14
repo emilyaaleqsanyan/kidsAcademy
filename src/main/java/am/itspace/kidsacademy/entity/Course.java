@@ -39,7 +39,7 @@ public class Course {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-   @ManyToOne
+    @ManyToOne
     private CourseSchedule courseSchedule;
 
 

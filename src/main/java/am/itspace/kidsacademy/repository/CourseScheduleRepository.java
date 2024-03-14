@@ -3,5 +3,5 @@ package am.itspace.kidsacademy.repository;
 import am.itspace.kidsacademy.entity.CourseSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CourseScheduleRepository extends JpaRepository<CourseSchedule,Integer> {
+public interface CourseScheduleRepository extends JpaRepository<CourseSchedule, Integer> {
 }

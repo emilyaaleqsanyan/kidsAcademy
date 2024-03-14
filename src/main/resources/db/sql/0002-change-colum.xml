@@ -6,9 +6,10 @@
     <changeSet id="0002-change-colum.xml" author="ealeqsanyan">
         <modifyDataType tableName="course" columnName="currency" newDataType="ENUM('AMD','USD','EUR')"/>
 
-        <modifyDataType tableName="course_schedule" columnName="day" newDataType="ENUM('MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY')"/>
+        <modifyDataType tableName="course_schedule" columnName="day"
+                        newDataType="ENUM('MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY')"/>
 
         <modifyDataType tableName="user" columnName="user_type" newDataType="ENUM('USER','ADMIN')"/>
-        
+
     </changeSet>
 </databaseChangeLog>
