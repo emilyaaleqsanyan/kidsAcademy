@@ -45,7 +45,7 @@ public class Course {
     private Currency currency;
 
     @ManyToOne
-    @JoinColumn(name = "scheduleId")
+    @JoinColumn(name = "schedule_id")
     private CourseSchedule courseSchedule;
 
 

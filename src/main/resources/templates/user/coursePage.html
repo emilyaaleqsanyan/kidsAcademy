@@ -144,7 +144,7 @@
                                 </li>
                                 <li>
                                     <i class="far fa-clock me-2" aria-hidden="true"
-                                       th:text="${course.getDuration()}"></i>month
+                                       th:text="${#strings.substringBefore(course.getDuration() , '.')}"></i> month
                                 </li>
                             </ul>
 
@@ -183,7 +183,7 @@
                                      th:each="pageNumber : ${pageNumbers}">
                                     <a th:href="@{/coursePage(size=${courses.size}, page=${pageNumber})}"
                                        th:text="${pageNumber}"
-                                       th:class="${pageNumber==courses.number + 1} ? active"></a>
+                                       th:class="${pageNumber ==courses.number +1} ? active"></a>
                                 </div>
                             </ul>
                         </nav>

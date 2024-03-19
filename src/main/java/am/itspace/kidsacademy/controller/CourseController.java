@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,10 +26,11 @@ public class CourseController {
 
     @GetMapping("/coursePage")
     public String coursePage(
-            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-            @RequestParam(value = "size", defaultValue = "4", required = false) int size,
+//            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+//            @RequestParam(value = "size", defaultValue = "4", required = false) int size,
+            @PageableDefault(size = 4, page = 1) Pageable page,
             @AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Pageable pageable = PageRequest.of(page.getPageNumber() - 1, page.getPageSize());
         Page<Course> coursesPage = courseService.findAll(pageable);
         modelMap.addAttribute("courses", coursesPage);
 
@@ -51,6 +52,7 @@ public class CourseController {
             return "redirect:/";
         }
         modelMap.addAttribute("course", byId);
+
 
         return "user/singleCourse";
 
