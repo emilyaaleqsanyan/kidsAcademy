@@ -26,8 +26,6 @@ public class CourseController {
 
     @GetMapping("/coursePage")
     public String coursePage(
-//            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-//            @RequestParam(value = "size", defaultValue = "4", required = false) int size,
             @PageableDefault(size = 4, page = 1) Pageable page,
             @AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
         Pageable pageable = PageRequest.of(page.getPageNumber() - 1, page.getPageSize());
