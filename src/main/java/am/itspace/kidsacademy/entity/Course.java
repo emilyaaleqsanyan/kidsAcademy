@@ -2,6 +2,7 @@ package am.itspace.kidsacademy.entity;
 
 import am.itspace.kidsacademy.entity.enums.Currency;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
@@ -10,11 +11,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 @EqualsAndHashCode
 @Table(name = "course")
 public class Course {
@@ -40,6 +45,7 @@ public class Course {
     private Currency currency;
 
     @ManyToOne
+    @JoinColumn(name = "schedule_id")
     private CourseSchedule courseSchedule;
 
 
