@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Site Tittle -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Photo Gallery - Kidz</title>
+
+    <!-- Plugins css Style -->
+    <link href='/user/plugins/fontawesome-5.15.2/css/all.min.css' rel='stylesheet'>
+    <link href='/user/plugins/fontawesome-5.15.2/css/fontawesome.min.css' rel='stylesheet'>
+    <link href='/user/plugins/animate/animate.css' rel='stylesheet'>
+
+    <link href='/user/plugins/fancybox/jquery.fancybox.min.css' rel='stylesheet'>
+    <link href='/user/plugins/isotope/isotope.min.css' rel='stylesheet'>
+
+
+
+
+
+
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,600,700|Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Custom css -->
+    <link href="/user/css/kidz.css" id="option_style" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link href="/user/img/favicon.png" rel="shortcut icon">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="body" class="up-scroll" data-bs-spy="scroll" data-bs-target=".element-right-sidebar" data-bs-offset="0">
+<!-- ====================================
+——— HEADER
+===================================== -->
+<header th:replace="fragment/headerFragment::header"></header>
+<div class="main-wrapper photo-gallery">
+
+
+    <!-- ====================================
+    ———	BREADCRUMB
+    ===================================== -->
+    <section class="breadcrumb-bg" style="background-image: url(/user/img/background/page-title-bg-img.jpg); ">
+        <div class="container">
+            <div class="breadcrumb-holder">
+                <div>
+                    <h1 class="breadcrumb-title">Photo Gallery</h1>
+                    <ul class="breadcrumb breadcrumb-transparent">
+                        <li class="breadcrumb-item">
+                            <a class="text-white" href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">
+                            Photo Gallery
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+    ———	GALLERY
+    ===================================== -->
+    <section class="py-8 py-md-10">
+        <div class="container">
+
+            <div id="gallery-grid">
+                <div class="row grid">
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item nature">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/27d30c7f8ad75d4cdc5481ddb8f97d919a5358ff/4a89d/assets/img/gallery/gallery-img1.jpg"
+                                     src="https://d33wubrfki0l68.cloudfront.net/27d30c7f8ad75d4cdc5481ddb8f97d919a5358ff/4a89d/assets/img/gallery/gallery-img1.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img1.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item charity">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/c34ab2df30d01ba4ceeaccf7780513316b25e943/81e58/assets/img/gallery/gallery-img2.jpg"
+                                     src="https://d33wubrfki0l68.cloudfront.net/c34ab2df30d01ba4ceeaccf7780513316b25e943/81e58//user/img/gallery/gallery-img2.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img2.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children nature">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/1f291f557084c3550e3f2d1d04c43f9b4a6413dd/716d0/assets/img/gallery/gallery-img3.jpg" src="https://d33wubrfki0l68.cloudfront.net/1f291f557084c3550e3f2d1d04c43f9b4a6413dd/716d0//user/img/gallery/gallery-img3.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img3.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children charity">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/f44a85e88b3615642fc0a87da8f8059f1fb07252/11c40/assets/img/gallery/gallery-img4.jpg" src="https://d33wubrfki0l68.cloudfront.net/f44a85e88b3615642fc0a87da8f8059f1fb07252/11c40//user/img/gallery/gallery-img4.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img4.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item nature">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/49fbf377be4de22ade5eb1f372feca5df096a9c4/88bcf/assets/img/gallery/gallery-img5.jpg" src="https://d33wubrfki0l68.cloudfront.net/49fbf377be4de22ade5eb1f372feca5df096a9c4/88bcf//user/img/gallery/gallery-img5.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img5.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children charity">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/f9c26f7b56491519849338f86855fb6e7b067faa/cc433/assets/img/gallery/gallery-img6.jpg" src="https://d33wubrfki0l68.cloudfront.net/f9c26f7b56491519849338f86855fb6e7b067faa/cc433//user/img/gallery/gallery-img6.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img6.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children charity">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/ec7c44d7b1001aecf0fc898c5c387b8c5861c5ee/7a555/assets/img/gallery/gallery-img7.jpg" src="https://d33wubrfki0l68.cloudfront.net/ec7c44d7b1001aecf0fc898c5c387b8c5861c5ee/7a555//user/img/gallery/gallery-img7.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img7.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item nature">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/cc4842bb47a1f2994dde39888b4afa66a1552796/57e69/assets/img/gallery/gallery-img8.jpg" src="https://d33wubrfki0l68.cloudfront.net/cc4842bb47a1f2994dde39888b4afa66a1552796/57e69//user/img/gallery/gallery-img8.jpg"
+                                     alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img8.jpg">
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div> <!-- element wrapper ends -->
+
+<!-- ====================================
+———	FOOTER
+===================================== -->
+<footer th:replace="fragment/footerFragment::footer"></footer>
+
+<
+
+<!-- Javascript -->
+<script src='/user/plugins/jquery/jquery.min.js'></script>
+<script src='/user/plugins/bootstrap/js/bootstrap.bundle.min.js'></script>
+
+<script src='/user/plugins/fancybox/jquery.fancybox.min.js'></script>
+<script src='/user/plugins/isotope/isotope.min.js'></script>
+<script src='/user/plugins/images-loaded/js/imagesloaded.pkgd.min.js'></script>
+
+<script src='/user/plugins/lazyestload/lazyestload.js'></script>
+<script src='/user/plugins/velocity/velocity.min.js'></script>
+<script src='/user/plugins/smoothscroll/SmoothScroll.js'></script>
+
+
+
+
+
+
+<!-- Load revolution slider only on Local File Systems. The following part can be removed on Server -->
+<!--
+<script src='/user/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js'></script>
+<script src='/user/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js'></script>
+<script src='/user/plugins/revolution/js/extensions/revolution.extension.navigation.min.js'></script>
+-->
+
+<script src='/user/plugins/wow/wow.min.js'></script>
+
+<script>
+    var d = new Date();
+    var year = d.getFullYear();
+    document.getElementById("copy-year").innerHTML = year;
+</script>
+<script src='/user/js/kidz.js'></script>
+<link href="/user/options/optionswitch.css" rel="stylesheet">
+<script src="/user/options/optionswitcher.js"></script>
+</body>
+
+</html>
+
