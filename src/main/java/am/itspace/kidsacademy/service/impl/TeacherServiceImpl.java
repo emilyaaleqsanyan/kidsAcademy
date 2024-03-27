@@ -51,7 +51,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher update(Teacher teacher, MultipartFile multipartFile) throws IOException {
+    public Teacher update(Teacher teacher, MultipartFile multipartFile) {
         Teacher updated = findById(teacher.getId());
 
         if (multipartFile != null && !multipartFile.isEmpty()) {

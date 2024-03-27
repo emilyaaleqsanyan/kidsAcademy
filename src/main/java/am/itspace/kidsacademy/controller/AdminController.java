@@ -1,5 +1,6 @@
 package am.itspace.kidsacademy.controller;
 
+import am.itspace.kidsacademy.entity.Photo;
 import am.itspace.kidsacademy.entity.Teacher;
 import am.itspace.kidsacademy.service.CourseService;
 import am.itspace.kidsacademy.service.PhotoService;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,11 +63,11 @@ public class AdminController {
 
 
     @PostMapping("/admin/teacher/add")
-    public String addTeacher(@ModelAttribute Teacher teacher, @RequestParam("picName") MultipartFile multipartFile) throws IOException {
-        Teacher saved = teacherService.save(teacher);
+    public String addTeacher(@ModelAttribute Teacher teacher, @RequestParam("picName") MultipartFile multipartFile) {
+       Teacher saved = teacherService.save(teacher);
         photoService.saveAll(saved, multipartFile);
         return "admin/teachers";
-    }
+       }
 
     @GetMapping("/admin/teachers/{id}")
     public String teacherSingle(@PathVariable("id") int id, ModelMap modelMap) {
@@ -91,7 +93,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/updateTeacher")
-    public String updateTeacher(@ModelAttribute Teacher teacher, @RequestParam("picName") MultipartFile multipartFile) throws IOException {
+    public String updateTeacher(@ModelAttribute Teacher teacher, @RequestParam("picName") MultipartFile multipartFile)  {
         teacherService.update(teacher, multipartFile);
         return "admin/teachers";
     }

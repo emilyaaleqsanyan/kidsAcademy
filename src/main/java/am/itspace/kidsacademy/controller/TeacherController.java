@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,10 +42,16 @@ public class TeacherController {
 
 
     @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImage(@RequestParam("picName") String picName) throws IOException {
+    public @ResponseBody byte[] getImage(@RequestParam("picName") String picName) {
         File file = new File(uploadDirectory, picName);
-        if (file.exists()) {
-            return IOUtils.toByteArray(new FileInputStream(file));
+        try {
+            if (file.exists()) {
+                return IOUtils.toByteArray(new FileInputStream(file));
+            }
+        } catch (FileNotFoundException  e ) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }

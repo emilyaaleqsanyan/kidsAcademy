@@ -13,5 +13,6 @@ public interface PhotoService {
 
     Photo findByTeacher(Teacher teacher);
 
-    void saveAll(Teacher teacher, MultipartFile multipartFile) throws IOException;
+    void saveAll(Teacher teacher, MultipartFile multipartFile);
+
 }

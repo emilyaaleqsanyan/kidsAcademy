@@ -17,5 +17,5 @@ public interface TeacherService {
 
     void delete(int teacherId);
 
-    Teacher update(Teacher teacher, MultipartFile multipartFile) throws IOException;
+    Teacher update(Teacher teacher, MultipartFile multipartFile) ;
 }
