@@ -29,7 +29,7 @@ public class CourseController {
             @PageableDefault(size = 4, page = 1) Pageable page,
             @AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
         Pageable pageable = PageRequest.of(page.getPageNumber() - 1, page.getPageSize());
-        Page<Course> coursesPage = courseService.findAll(pageable);
+        Page<Course> coursesPage = courseService.findAll(pageable,modelMap,-1);
         modelMap.addAttribute("courses", coursesPage);
 
         int totalPages = coursesPage.getTotalPages();

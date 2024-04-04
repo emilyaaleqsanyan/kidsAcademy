@@ -2,14 +2,14 @@ package am.itspace.kidsacademy.controller;
 
 
 import am.itspace.kidsacademy.entity.Teacher;
-import am.itspace.kidsacademy.service.CourseService;
+import am.itspace.kidsacademy.exception.GlobalExceptionHandler;
+import am.itspace.kidsacademy.exception.OwnCustomException;
 import am.itspace.kidsacademy.service.PhotoService;
+import am.itspace.kidsacademy.service.PictureService;
 import am.itspace.kidsacademy.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
@@ -24,9 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 
 @Controller
@@ -37,8 +35,9 @@ public class TeacherController {
     private String uploadDirectory;
 
     private final TeacherService teacherService;
-    private final CourseService courseService;
     private final PhotoService photoService;
+    private  final GlobalExceptionHandler globalExceptionHandler;
+    private final PictureService pictureService;
 
 
     @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
@@ -48,41 +47,32 @@ public class TeacherController {
             if (file.exists()) {
                 return IOUtils.toByteArray(new FileInputStream(file));
             }
-        } catch (FileNotFoundException  e ) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException ex) {
+     throw  new OwnCustomException();
+        } catch (IOException ex) {
+         throw new OwnCustomException();
         }
-        return null;
+        return new byte[0];
     }
 
 
     @GetMapping("/teachers")
     public String teachersPage(@PageableDefault(size = 4, page = 1) Pageable page, ModelMap modelMap) {
-        Pageable pageable = PageRequest.of(page.getPageNumber() - 1, page.getPageSize());
-        Page<Teacher> teachersPage = teacherService.findAll(pageable);
-        modelMap.addAttribute("teachers", teachersPage);
-        modelMap.addAttribute("courses", courseService.findAll(pageable));
-
-        int totalPages = teachersPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            modelMap.addAttribute("pageNumbers", pageNumbers);
-        }
+        teacherService.findAll(page, modelMap);
         return "user/teachers";
     }
 
 
     @GetMapping("/teachers/{id}")
     public String teacherSinglePage(@PathVariable("id") int id, ModelMap modelMap) {
-        Teacher byId = teacherService.findById(id);
+        Teacher byId = teacherService.findById(id,modelMap);
         if (byId == null) {
             return "redirect:user/teachers";
         }
         modelMap.addAttribute("teacher", byId);
-        modelMap.addAttribute("courses", courseService.findAll(Pageable.unpaged()));
+
         return "user/singleTeacher";
     }
+
+
 }

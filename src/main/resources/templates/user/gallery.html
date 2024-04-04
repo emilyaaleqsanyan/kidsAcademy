@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org"
+      xmlns:data-th="http://www.w3.org/1999/xhtml">
 <head>
 
     <!-- Site Tittle -->
@@ -59,7 +60,7 @@
                     <h1 class="breadcrumb-title">Photo Gallery</h1>
                     <ul class="breadcrumb breadcrumb-transparent">
                         <li class="breadcrumb-item">
-                            <a class="text-white" href="index.html">Home</a>
+                            <a class="text-white" >Home</a>
                         </li>
                         <li class="breadcrumb-item text-white active" aria-current="page">
                             Photo Gallery
@@ -73,131 +74,46 @@
     <!-- ====================================
     ———	GALLERY
     ===================================== -->
+
     <section class="py-8 py-md-10">
-        <div class="container">
+        <div class="container" th:each="picture:${pictures}">
 
-            <div id="gallery-grid">
-                <div class="row grid">
+            <div id="gallery-grid" >
+                <div class="row grid" >
                     <div class="col-md-4 col-lg-3 col-xs-12 element-item nature">
                         <div class="media media-hoverable justify-content-center">
                             <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/27d30c7f8ad75d4cdc5481ddb8f97d919a5358ff/4a89d/assets/img/gallery/gallery-img1.jpg"
-                                     src="https://d33wubrfki0l68.cloudfront.net/27d30c7f8ad75d4cdc5481ddb8f97d919a5358ff/4a89d/assets/img/gallery/gallery-img1.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img1.jpg">
+                                <img class="media-img w-100 lazyestload" data-th:src="@{/getImage(picName=${picture.getPictureName()})}" th:src="@{/getImage(picName=${picture.getPictureName()})}"  alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery"  th:href="@{/getImage(picName=${picture.getPictureName()})}">
                                     <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
+                                        <i class="fa fa-search-plus" ></i>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-4 col-lg-3 col-xs-12 element-item charity">
-                        <div class="media media-hoverable justify-content-center">
-                            <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/c34ab2df30d01ba4ceeaccf7780513316b25e943/81e58/assets/img/gallery/gallery-img2.jpg"
-                                     src="https://d33wubrfki0l68.cloudfront.net/c34ab2df30d01ba4ceeaccf7780513316b25e943/81e58//user/img/gallery/gallery-img2.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img2.jpg">
-                                    <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children nature">
-                        <div class="media media-hoverable justify-content-center">
-                            <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/1f291f557084c3550e3f2d1d04c43f9b4a6413dd/716d0/assets/img/gallery/gallery-img3.jpg" src="https://d33wubrfki0l68.cloudfront.net/1f291f557084c3550e3f2d1d04c43f9b4a6413dd/716d0//user/img/gallery/gallery-img3.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img3.jpg">
-                                    <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children charity">
-                        <div class="media media-hoverable justify-content-center">
-                            <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/f44a85e88b3615642fc0a87da8f8059f1fb07252/11c40/assets/img/gallery/gallery-img4.jpg" src="https://d33wubrfki0l68.cloudfront.net/f44a85e88b3615642fc0a87da8f8059f1fb07252/11c40//user/img/gallery/gallery-img4.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img4.jpg">
-                                    <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xs-12 element-item nature">
-                        <div class="media media-hoverable justify-content-center">
-                            <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/49fbf377be4de22ade5eb1f372feca5df096a9c4/88bcf/assets/img/gallery/gallery-img5.jpg" src="https://d33wubrfki0l68.cloudfront.net/49fbf377be4de22ade5eb1f372feca5df096a9c4/88bcf//user/img/gallery/gallery-img5.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img5.jpg">
-                                    <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children charity">
-                        <div class="media media-hoverable justify-content-center">
-                            <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/f9c26f7b56491519849338f86855fb6e7b067faa/cc433/assets/img/gallery/gallery-img6.jpg" src="https://d33wubrfki0l68.cloudfront.net/f9c26f7b56491519849338f86855fb6e7b067faa/cc433//user/img/gallery/gallery-img6.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img6.jpg">
-                                    <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xs-12 element-item children charity">
-                        <div class="media media-hoverable justify-content-center">
-                            <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/ec7c44d7b1001aecf0fc898c5c387b8c5861c5ee/7a555/assets/img/gallery/gallery-img7.jpg" src="https://d33wubrfki0l68.cloudfront.net/ec7c44d7b1001aecf0fc898c5c387b8c5861c5ee/7a555//user/img/gallery/gallery-img7.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img7.jpg">
-                                    <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xs-12 element-item nature">
-                        <div class="media media-hoverable justify-content-center">
-                            <div class="position-relative w-100">
-                                <img class="media-img w-100 lazyestload" data-src="https://d33wubrfki0l68.cloudfront.net/cc4842bb47a1f2994dde39888b4afa66a1552796/57e69/assets/img/gallery/gallery-img8.jpg" src="https://d33wubrfki0l68.cloudfront.net/cc4842bb47a1f2994dde39888b4afa66a1552796/57e69//user/img/gallery/gallery-img8.jpg"
-                                     alt="gallery-img">
-                                <a class="media-img-overlay" data-fancybox="gallery" href="/user/img/gallery/gallery-lg-img8.jpg">
-                                    <div class="btn btn-squre">
-                                        <i class="fa fa-search-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
+          </div>
     </section>
-
-</div> <!-- element wrapper ends -->
-
+ <!-- element wrapper ends -->
+<section class="py-5">
+    <div class="center">
+        <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center align-items-center">
+                    <div th:if="${pictures.totalPages > 0}" class="pagination"
+                         th:each="pageNumber : ${pageNumbers}">
+                        <a th:href="@{/gallery(size=${pictures.size}, page=${pageNumber})}"
+                           th:text="${pageNumber}"
+                           th:class="${pageNumber ==pictures.number +1} ? active"></a>
+                    </div>
+                </ul>
+            </nav>
+        </nav>
+    </div>
+</section></div>
 <!-- ====================================
 ———	FOOTER
 ===================================== -->

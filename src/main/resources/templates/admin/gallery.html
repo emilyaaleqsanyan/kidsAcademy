@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org"
+      xmlns:data-th="http://www.w3.org/1999/xhtml">
 <head>
 
     <!-- Site Tittle -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Teachers details - Kidz</title>
+    <title>Photo Gallery - Kidz</title>
 
     <!-- Plugins css Style -->
     <link href='/user/plugins/fontawesome-5.15.2/css/all.min.css' rel='stylesheet'>
     <link href='/user/plugins/fontawesome-5.15.2/css/fontawesome.min.css' rel='stylesheet'>
     <link href='/user/plugins/animate/animate.css' rel='stylesheet'>
+
+    <link href='/user/plugins/fancybox/jquery.fancybox.min.css' rel='stylesheet'>
+    <link href='/user/plugins/isotope/isotope.min.css' rel='stylesheet'>
+
+
+
 
 
     <!-- Fonts -->
@@ -29,7 +36,35 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .center {
+            text-align: center;
+        }
 
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+        .pagination a.active {
+            background-color: #e05625;
+            color: white;
+            border: 1px solid #e86f17;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 
 <body id="body" class="up-scroll" data-bs-spy="scroll" data-bs-target=".element-right-sidebar" data-bs-offset="0">
@@ -37,7 +72,7 @@
 ——— HEADER
 ===================================== -->
 <header th:replace="fragment/adminHeaderFragment::adminHeader"></header>
-<div class="main-wrapper teachers-details">
+<div class="main-wrapper photo-gallery">
 
 
     <!-- ====================================
@@ -47,16 +82,15 @@
         <div class="container">
             <div class="breadcrumb-holder">
                 <div>
-                    <h1 class="breadcrumb-title">Teachers Details</h1>
+                    <h1 class="breadcrumb-title">Photo Gallery</h1>
+                    <h1 class="breadcrumb-title" ><a href="/admin/addPicture">Add Photo</a> </h1>
                     <ul class="breadcrumb breadcrumb-transparent">
                         <li class="breadcrumb-item">
                             <a class="text-white">Home</a>
                         </li>
                         <li class="breadcrumb-item text-white active" aria-current="page">
-                            Teachers List
-                        </li> <li class="breadcrumb-item text-white active" aria-current="page">
-                        Teacher
-                    </li>
+                            Photo Gallery
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -64,60 +98,61 @@
     </section>
 
     <!-- ====================================
-    ———	TEACHERS DETAILS
+    ———	GALLERY
     ===================================== -->
-    <section class="py-7 py-md-10">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 col-xs-12">
-                    <div class="image mb-5 mb-md-0">
-                        <img class="w-100 rounded" th:src="@{/getImage(picName=${teacher.getPhoto().getName()})}"  alt="team-1.jpg">
+    <section class="py-8 py-md-10">
+        <div class="container" th:each="picture:${pictures}">
+
+            <div id="gallery-grid" >
+                <div class="row grid" >
+                    <div class="col-md-4 col-lg-3 col-xs-12 element-item nature">
+                        <div class="media media-hoverable justify-content-center">
+                            <div class="position-relative w-100">
+                                <img class="media-img w-100 lazyestload"  data-th:src="@{/getImage(picName=${picture.getPictureName()})}"  th:src="@{/getImage(picName=${picture.getPictureName()})}"  alt="gallery-img">
+                                <a class="media-img-overlay" data-fancybox="gallery"  th:href="@{/getImage(picName=${picture.getPictureName()})}"  >
+                                    <div class="btn btn-squre">
+                                        <i class="fa fa-search-plus" ></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-sm-8 col-xs-12">
-                    <h2 class="text-danger font-weight-bold text-capitalize ps-0 mb-5" ></h2>
-
-
-
-                    <h2 class="text-danger font-weight-medium mb-3 " th:text="${teacher.getName()}"></h2>
-                    <h2 class="text-danger font-weight-medium mb-3 " th:text="${teacher.getSurname()}"></h2>
-
-                    <div class="text-muted text-capitalize font-weight-medium ms-4 mb-5 font-size-20" >Course</div>
-
-                    <div class="text-white rounded bg-primary text-uppercase font-weight-medium px-6 py-3 mb-3" th:text="${teacher.getCourse().getCourseName()}" ></div>
-
-                    <div class="text-muted text-capitalize font-weight-medium ms-4 mb-5 font-size-20" >Info</div>
-
-                    <div class="text-white rounded bg-success text-uppercase font-weight-medium px-6 py-3 mb-3" th:text="${teacher.getInformation()}"></div>
-
-                   <a th:href="@{'/admin/teacher/update/' + ${teacher.getId()}}"> <h4><input type="submit" value="Update"> </h4></a>
-                   <a th:href="@{'/admin/teacher/delete/' + ${teacher.getId()}}"> <h4><input type="submit" value="Delete"> </h4></a>
-
 
                 </div>
             </div>
-        </div>
+        <a th:href="@{'/admin/picture/delete/' + ${picture.getId()}}"> <h4><input type="submit" value="Delete"> </h4></a></div>
     </section>
-
 </div> <!-- element wrapper ends -->
-
+<section class="py-5">
+    <div class="center">
+        <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center align-items-center">
+                    <div th:if="${pictures.totalPages > 0}" class="pagination"
+                         th:each="pageNumber : ${pageNumbers}">
+                        <a th:href="@{/admin/gallery(size=${pictures.size}, page=${pageNumber})}"
+                           th:text="${pageNumber}"
+                           th:class="${pageNumber ==pictures.number +1} ? active"></a>
+                    </div>
+                </ul>
+            </nav>
+        </nav>
+    </div>
+</section>
 <!-- ====================================
 ———	FOOTER
 ===================================== -->
 <footer th:replace="fragment/footerFragment::footer"></footer>
 
-<!-- Modal Enroll -->
-<!--scrolling-->
-
+<
 
 <!-- Javascript -->
 <script src='/user/plugins/jquery/jquery.min.js'></script>
 <script src='/user/plugins/bootstrap/js/bootstrap.bundle.min.js'></script>
 
-
-
-
+<script src='/user/plugins/fancybox/jquery.fancybox.min.js'></script>
+<script src='/user/plugins/isotope/isotope.min.js'></script>
+<script src='/user/plugins/images-loaded/js/imagesloaded.pkgd.min.js'></script>
 
 <script src='/user/plugins/lazyestload/lazyestload.js'></script>
 <script src='/user/plugins/velocity/velocity.min.js'></script>
