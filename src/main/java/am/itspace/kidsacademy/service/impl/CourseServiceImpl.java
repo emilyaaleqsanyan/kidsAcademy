@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 
-
 @Service
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
@@ -36,7 +35,7 @@ public class CourseServiceImpl implements CourseService {
         if(id != -1){
             teacherService.findById(id,modelMap);
         }
-//        modelMap.addAttribute("courses",courseRepository.findAll(pageable));
+        modelMap.addAttribute("courses",courseRepository.findAll(pageable));
         return null;
     }
 
@@ -45,7 +44,5 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findById(id).orElse(null);
     }
 }
-
-
 
 
