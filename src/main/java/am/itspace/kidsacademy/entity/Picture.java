@@ -2,12 +2,10 @@ package am.itspace.kidsacademy.entity;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -16,33 +14,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "picture")
 @EqualsAndHashCode
-@Table(name = "photo")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
 @Getter
-public class Photo {
-
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Picture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private String name;
-
-    private String path;
-
-    @OneToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    private String pictureName;
 
     @Override
     public String toString() {
-        return "Photo{" +
+        return "Picture{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", path='" + path + '\'' +
+                ", pictureName='" + pictureName + '\'' +
                 '}';
     }
 }

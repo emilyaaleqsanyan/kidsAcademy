@@ -11,13 +11,16 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @EqualsAndHashCode
 @Table(name = "teacher")
+@Getter
+@Setter
+
 public class Teacher {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,12 +28,12 @@ public class Teacher {
     private String name;
 
     private String surname;
-
     @ManyToOne
-    @JoinColumn(name = "courseId")
+    @JoinColumn(name = "course_id")
     private Course course;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "teacher")
+    @JoinColumn(name = "pic_name")
     private Photo photo;
 
     private String information;
