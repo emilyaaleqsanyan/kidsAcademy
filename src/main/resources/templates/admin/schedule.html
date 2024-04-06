@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Site Tittle -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course Single Left Sidebar</title>
+
+    <!-- Plugins css Style -->
+    <link href='/user/plugins/fontawesome-5.15.2/css/all.min.css' rel='stylesheet'>
+    <link href='/user/plugins/fontawesome-5.15.2/css/fontawesome.min.css' rel='stylesheet'>
+    <link href='/user/plugins/animate/animate.css' rel='stylesheet'>
+
+    <link href='/user/plugins/select2/css/select2.min.css' rel='stylesheet'>
+    <link href='/user/plugins/no-ui-slider/nouislider.min.css' rel='stylesheet'>
+
+
+    <!-- Fonts -->
+    <link href="css?family=Dosis:300,400,600,700|Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Custom css -->
+    <link href="/user/css/kidz.css" id="option_style" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link href="/user/img/favicon.png" rel="shortcut icon">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+        .pagination a.active {
+            background-color: #e05625;
+            color: white;
+            border: 1px solid #e86f17;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 600px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .styled-table thead tr {
+            background-color: #dc9459;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #9292f6;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #e78022;
+        }
+    </style>
+
+</head>
+
+<body id="body" class="up-scroll" data-bs-spy="scroll" data-bs-target=".element-right-sidebar" data-bs-offset="0">
+<!-- ====================================
+——— HEADER
+===================================== -->
+<header th:replace="fragment/headerFragment::header"></header>
+<div class="main-wrapper course-single-left-sidebar">
+
+
+    <!-- ====================================
+    ———	BREADCRUMB
+    ===================================== -->
+    <section class="breadcrumb-bg" style="background-image: url(/user/img/background/page-title-bg-img.jpg); ">
+        <div class="container">
+            <div class="breadcrumb-holder">
+                <div>
+                    <h1 class="breadcrumb-title">SCHEDULE</h1>
+                    <ul class="breadcrumb breadcrumb-transparent">
+                        <li class="breadcrumb-item">
+                            <a class="text-white" href="/admin/home">Home</a>
+                        </li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">
+                           <a href="/admin/addSchedule">ADD SCHEDULE</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+    ———	COURSES SECTION
+    ===================================== -->
+    <section class="py-8 pt-md-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8 order-md-1">
+                    <div class="card shadow-none bg-transparent">
+                        <img class="card-img-top" src="/user/img/courses/feature-course-single-title.jpg"
+                             alt="Card image">
+
+                        <div class="card-body border-top-5 border-primary position-relative">
+
+
+                            <h3 class="card-title text-primary">Course Schedule</h3>
+<!--                            <div class="table-responsive table-class-schedule">-->
+                                <table class="styled-table"  >
+                                    <thead >
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Course name</th>
+                                        <th>Course Start</th>
+                                        <th>Course End</th>
+                                        <th>Day</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:each="schedule:${courseSchedule}">
+                                    <tr>
+                                        <td th:text="${schedule.id}"></td>
+                                        <td th:text="${schedule.getCourse().courseName}"></td>
+                                        <td th:text="${schedule.getCourseStart()}"></td>
+                                        <td th:text="${schedule.getCourseEnd()}"></td>
+                                        <td th:text="${schedule.getDay()}"></td>
+                                        <td><a th:href="@{'/schedule/update/' + ${schedule.id}}">Update</a> </td>
+                                        <td><a th:href="@{'/schedule/delete/' + ${schedule.id}}">Delete</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+</div> <!-- element wrapper ends -->
+
+<!-- ====================================
+———	FOOTER
+===================================== -->
+<footer th:replace="fragment/footerFragment::footer"></footer>
+
+<!-- Modal Login -->
+
+
+<!-- Modal Create Account -->
+
+
+<!-- Modal Enroll -->
+
+
+<!-- Modal Products -->
+
+
+<!--scrolling-->
+<div class="">
+    <a href="#pageTop" class="back-to-top" id="back-to-top" style="opacity: 1;">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+<!-- Javascript -->
+<script src='/user/plugins/jquery/jquery.min.js'></script>
+<script src='/user/plugins/bootstrap/js/bootstrap.bundle.min.js'></script>
+
+
+<script src='/user/plugins/lazyestload/lazyestload.js'></script>
+<script src='/user/plugins/velocity/velocity.min.js'></script>
+<script src='/user/plugins/smoothscroll/SmoothScroll.js'></script>
+
+
+<!-- Load revolution slider only on Local File Systems. The following part can be removed on Server -->
+<!--
+<script src='/user/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js'></script>
+<script src='/user/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js'></script>
+<script src='/user/plugins/revolution/js/extensions/revolution.extension.navigation.min.js'></script>
+-->
+
+<script src='/user/plugins/wow/wow.min.js'></script>
+
+<script>
+    var d = new Date();
+    var year = d.getFullYear();
+    document.getElementById("copy-year").innerHTML = year;
+</script>
+<script src='/user/js/kidz.js'></script>
+<link href="/user/options/optionswitch.css" rel="stylesheet">
+<script src="/user/options/optionswitcher.js"></script>
+</body>
+
+</html>
+
