@@ -11,7 +11,6 @@ public interface PhotoService {
 
     Photo save(Photo photo);
 
-
     Optional<Photo> findByTeacher(Teacher teacher);
 
     void saveAll(Teacher teacher, MultipartFile multipartFile);

@@ -1,7 +1,10 @@
 package am.itspace.kidsacademy.controller;
 
+import am.itspace.kidsacademy.entity.Course;
+import am.itspace.kidsacademy.entity.CourseSchedule;
 import am.itspace.kidsacademy.entity.News;
 import am.itspace.kidsacademy.entity.Teacher;
+import am.itspace.kidsacademy.service.CourseScheduleService;
 import am.itspace.kidsacademy.service.CourseService;
 import am.itspace.kidsacademy.service.NewsService;
 import am.itspace.kidsacademy.service.PhotoService;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import java.io.IOException;
 
 @Controller
@@ -35,11 +37,103 @@ public class AdminController {
     private final PhotoService photoService;
     private final PictureService pictureService;
     private final NewsService newsService;
+    private final CourseScheduleService courseScheduleService;
 
     @GetMapping("/admin/home")
     public String adminHome() {
         return "admin/home";
     }
+
+
+    @GetMapping("/admin/allCourses")
+    public String allCoursesPage(ModelMap modelMap) {
+        courseService.findAllAndAddToModelMap(modelMap);
+        return "/admin/allCourses";
+    }
+
+    @GetMapping("/admin/addCourse")
+    public String addCoursePage() {
+        return "admin/addCourse";
+    }
+
+
+    @PostMapping("/admin/course/add")
+    public String addCourse(@ModelAttribute Course course) {
+        courseService.save(course);
+        return "/admin/addCourse";
+    }
+
+
+    @GetMapping("/courses/update/{id}")
+    public String updateCoursesPage(@PathVariable("id") int id, ModelMap modelMap) {
+        Course byId = courseService.findById(id);
+        if (byId != null) {
+            modelMap.addAttribute("course", byId);
+            return "admin/updateCourse";
+        }
+        return "redirect:/admin/allCourses";
+    }
+
+
+    @PostMapping("/admin/courseUpdate")
+    public String updateCourse(@ModelAttribute Course course) {
+        courseService.update(course);
+        return "redirect:/admin/allCourses";
+    }
+
+
+    @GetMapping("/courses/delete/{id}")
+    public String deleteCourse(@PathVariable("id") int id) {
+        courseService.delete(id);
+        return "redirect:/admin/allCourses";
+    }
+
+    @GetMapping("/admin/schedule")
+    public String schedulePage(ModelMap modelMap) {
+        courseScheduleService.findAll(modelMap);
+        return "/admin/schedule";
+    }
+
+
+    @GetMapping("/admin/addSchedule")
+    public String addSchedulePage(ModelMap modelMap) {
+            courseService.findAllAndAddToModelMap(modelMap);
+            return "/admin/addSchedule";
+    }
+
+
+    @PostMapping("/admin/schedule/add")
+    public String addSchedule(@ModelAttribute CourseSchedule courseSchedule) {
+        courseScheduleService.save(courseSchedule);
+        return "redirect:/admin/schedule";
+    }
+
+
+    @GetMapping("/schedule/update/{id}")
+    public String updateSchedulePage(@PathVariable("id") int id, ModelMap modelMap) {
+        CourseSchedule courseSchedule = courseScheduleService.findById(id);
+        courseService.findAllAndAddToModelMap(modelMap);
+        if (courseSchedule != null) {
+            modelMap.addAttribute("courseSchedule", courseSchedule);
+            return "admin/updateCourseSchedule";
+        }
+        return "redirect:/admin/schedule";
+    }
+
+
+    @PostMapping("/admin/courseScheduleUpdate")
+    public String updateCourseSchedule(@ModelAttribute CourseSchedule courseSchedule) {
+        courseScheduleService.update(courseSchedule);
+        return "redirect:/admin/schedule";
+    }
+
+
+    @GetMapping("/schedule/delete/{id}")
+    public String deleteCourseSchedule(@PathVariable("id") int id) {
+        courseScheduleService.delete(id);
+        return "redirect:/admin/schedule";
+    }
+
 
     @GetMapping("/admin/teachers")
     public String teacherPage(@PageableDefault(size = 4, page = 1) Pageable page,
@@ -55,7 +149,8 @@ public class AdminController {
     }
 
     @PostMapping("/admin/teacher/add")
-    public String addTeacher(@ModelAttribute Teacher teacher, @RequestParam("picName") MultipartFile multipartFile) {
+    public String addTeacher(@ModelAttribute Teacher teacher,
+                             @RequestParam("picName") MultipartFile multipartFile) {
         teacherService.save(teacher);
         photoService.saveAll(teacher, multipartFile);
         return "redirect:/admin/teachers";
@@ -80,7 +175,8 @@ public class AdminController {
     }
 
     @PostMapping("/admin/updateTeacher")
-    public String updateTeacher(@ModelAttribute Teacher teacher, @RequestParam("picName") MultipartFile multipartFile, ModelMap modelMap) throws IOException {
+    public String updateTeacher(@ModelAttribute Teacher teacher,
+                                @RequestParam("picName") MultipartFile multipartFile, ModelMap modelMap) throws IOException {
         teacherService.update(teacher, multipartFile);
         return "redirect:/admin/teachers";
     }
