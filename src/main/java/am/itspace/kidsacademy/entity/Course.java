@@ -4,6 +4,7 @@ import am.itspace.kidsacademy.entity.enums.Currency;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -44,9 +46,9 @@ public class Course {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private CourseSchedule courseSchedule;
+    @OneToMany(mappedBy = "course")
+//    @JoinColumn(name = "schedule_id")
+    private List<CourseSchedule> courseScheduleList;
 
 
     @Override

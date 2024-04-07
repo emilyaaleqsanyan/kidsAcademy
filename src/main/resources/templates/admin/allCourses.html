@@ -63,6 +63,44 @@
         .pagination a:hover:not(.active) {
             background-color: #ddd;
         }
+
+
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .styled-table thead tr {
+            background-color: #dc9459;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #9292f6;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #e78022;
+        }
     </style>
 </head>
 
@@ -82,13 +120,14 @@
         <div class="container">
             <div class="breadcrumb-holder">
                 <div>
+                    <h2 class="breadcrumb-title">ADMIN</h2>
                     <h1 class="breadcrumb-title">All Courses</h1>
                     <ul class="breadcrumb breadcrumb-transparent">
                         <li class="breadcrumb-item">
-                            <a class="text-white" href="/">Home</a>
+                            <a class="text-white" href="/admin/home">Home</a>
                         </li>
                         <li class="breadcrumb-item text-white active" aria-current="page">
-                            All Courses
+                            <a href="/admin/addCourse">ADD COURSE</a>
                         </li>
                     </ul>
                 </div>
@@ -99,80 +138,41 @@
     <!-- ====================================
     ———	COURSES SECTION
     ===================================== -->
-    <section class="py-8 py-md-10">
-        <div class="container">
-            <div class="row">
 
-                <div class="col-lg-9 col-sm-12">
-                    <div th:each="course: ${courses}" class="media media-list-view mb-5">
-                        <a class="media-img">
-                            <img src="/user/img/courses/gallery-lg-img6.jpg" alt="Image">
+    <div class="card shadow-none bg-transparent">
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Start date</th>
+                <th>Years old</th>
+                <th>Available seats</th>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Currency</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody th:each="course : ${allCourse}">
+            <tr>
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.courseName}"></td>
+                <td th:text="${#dates.format(course.startDate, 'dd-MM-yyyy')}"></td>
+                <td th:text="${course.yearsOld}"></td>
+                <td th:text="${course.availableSeats}"></td>
+                <td th:text="${#strings.substringBefore(course.getDuration() , '.')}"></td>
+                <td th:text="${#strings.substringBefore(course.getPrice() , '.')}"></td>
+                <td th:text="${course.currency}"></td>
+                <td><a th:href="@{'/courses/update/' + ${course.id}}">Update</a> </td>
+                <td><a th:href="@{'/courses/delete/' + ${course.id}}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
 
-                        </a>
+    </div>
 
-
-                        <div class="media-body">
-                            <h3>
-                                <a class="text-primary"
-                                   th:text="${course.getCourseName()}"></a>
-                            </h3>
-
-                            <ul class="list-unstyled d-flex text-muted mb-3">
-                                <li class="me-3">
-                                    <i class="far fa-calendar me-2" aria-hidden="true"
-                                       th:text="${#dates.format(course.startDate, 'dd-MM-yyyy')}"></i>
-                                </li>
-                                <li>
-                                    <i class="far fa-clock me-2" aria-hidden="true"
-                                       th:text="${#strings.substringBefore(course.getDuration() , '.')}"></i> month
-                                </li>
-                            </ul>
-
-
-                            <p class="text-justify mb-lg-2">We aim to provide our children with an enriching and safe
-                                environment where they learn from an early age to be independent thinkers, to work with
-                                each other cooperatively, to foster a love for learning and to think about the ever
-                                changing world around them. We aim to build the foundations for the leaders and
-                                innovators of tomorrow through confidence and limitless thinking and creativity.</p>
-
-
-                            <div class="">
-
-                                <a class="btn btn-link text-hover-primary text-underline ps-0"
-                                   th:href="@{'/courses/' + ${course.id}}">
-                                    More <i class="fa fa-angle-double-right me-1" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-8">
-            <!-- ====================================
-    ———	PAGINATION
-    ===================================== -->
-            <section class="py-5">
-                <div class="center">
-                    <nav aria-label="Page navigation example">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center align-items-center">
-                                <div th:if="${courses.totalPages > 0}" class="pagination"
-                                     th:each="pageNumber : ${pageNumbers}">
-                                    <a th:href="@{/coursePage(size=${courses.size}, page=${pageNumber})}"
-                                       th:text="${pageNumber}"
-                                       th:class="${pageNumber ==courses.number +1} ? active"></a>
-                                </div>
-                            </ul>
-                        </nav>
-                    </nav>
-                </div>
-            </section>
-
-        </div>
-    </section>
 
 </div> <!-- element wrapper ends -->
 

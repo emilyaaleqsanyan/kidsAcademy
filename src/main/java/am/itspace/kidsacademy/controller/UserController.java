@@ -6,7 +6,6 @@ import am.itspace.kidsacademy.security.SpringUser;
 import am.itspace.kidsacademy.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+
 
     @GetMapping("/user/register")
-    public String userRegisterPage(@RequestParam(value = "msg", required = false) String msg, ModelMap modelMap) {
+    public String userRegisterPage(@RequestParam(value = "msg", required = false)
+                                   String msg, ModelMap modelMap) {
         if (msg != null && !msg.isEmpty()) {
             modelMap.addAttribute("msg", msg);
         }
@@ -31,15 +31,7 @@ public class UserController {
 
     @PostMapping("/user/register")
     public String userRegister(@ModelAttribute User user) {
-        User byEmail = userService.findByEmail(user.getEmail());
-        if (byEmail == null) {
-            user.setUserType(UserType.USER);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userService.save(user);
-            return "redirect:/user/register?msg=User Registered";
-        } else {
-            return "redirect:/user/register?msg=Email already in use";
-        }
+        return userService.userRegister(user);
     }
 
     @GetMapping("/loginPage")
@@ -59,8 +51,6 @@ public class UserController {
             return "redirect:/";
         }
     }
-
-
 }
 
 

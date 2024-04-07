@@ -8,8 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
 
-
-
 public interface TeacherService {
     Teacher save(Teacher teacher);
 

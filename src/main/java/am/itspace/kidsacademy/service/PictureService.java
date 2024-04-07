@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface PictureService {
     Page<Picture> findAll(Pageable pageable, ModelMap modelMap);
 
-
     void save(MultipartFile mFile);
 
     void delete(int pictureId);
