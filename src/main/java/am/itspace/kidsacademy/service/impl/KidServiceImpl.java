@@ -4,6 +4,7 @@ import am.itspace.kidsacademy.entity.Kid;
 import am.itspace.kidsacademy.entity.enums.UserType;
 import am.itspace.kidsacademy.repository.KidRepository;
 import am.itspace.kidsacademy.security.SpringUser;
+import am.itspace.kidsacademy.service.CourseService;
 import am.itspace.kidsacademy.service.KidService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class KidServiceImpl implements KidService {
 
     private final KidRepository kidRepository;
+    private final CourseService courseService;
 
     @Override
     public List<Kid> findAll() {
@@ -25,8 +27,14 @@ public class KidServiceImpl implements KidService {
     }
 
     @Override
-    public Kid save(Kid kid) {
-        return kidRepository.save(kid);
+    public String save(Kid kid, SpringUser springUser, int id) {
+        if (springUser == null) {
+            return "redirect:/loginPage";
+        }
+        kid.setUser(springUser.getUser());
+        kid.setCourse(courseService.findById(id));
+        kidRepository.save(kid);
+        return "redirect:/coursePage";
     }
 
     @Override

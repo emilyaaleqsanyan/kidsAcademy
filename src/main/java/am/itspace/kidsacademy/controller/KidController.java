@@ -26,13 +26,7 @@ public class KidController {
     public String kidRegister(@ModelAttribute Kid kid,
                               @AuthenticationPrincipal SpringUser springUser,
                               @RequestParam("courseId") int id) {
-        if (springUser == null) {
-            return "redirect:/loginPage";
-        }
-        kid.setUser(springUser.getUser());
-        kid.setCourse(courseService.findById(id));
-        kidService.save(kid);
-        return "redirect:/coursePage";
+        return kidService.save(kid, springUser, id);
     }
 
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface KidService {
 
-    Kid save(Kid kid);
+    String save(Kid kid,SpringUser springUser, int id);
 
     List<Kid> findAll();
 

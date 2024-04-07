@@ -14,6 +14,8 @@ import jakarta.persistence.Id;
 import java.util.List;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalTime;
@@ -22,6 +24,8 @@ import java.time.LocalTime;
 @Entity
 @EqualsAndHashCode
 @Table(name = "course_schedule")
+@Getter
+@Setter
 public class CourseSchedule {
 
     @Id
