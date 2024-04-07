@@ -14,6 +14,8 @@ import lombok.Setter;
 
 @Entity
 @EqualsAndHashCode
+@Getter
+@Setter
 @Table(name = "kid")
 @Getter
 @Setter

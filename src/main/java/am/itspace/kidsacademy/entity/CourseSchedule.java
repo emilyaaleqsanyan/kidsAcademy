@@ -1,6 +1,8 @@
 package am.itspace.kidsacademy.entity;
 
 import am.itspace.kidsacademy.entity.enums.Day;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,8 @@ import java.time.LocalTime;
 
 @Entity
 @EqualsAndHashCode
+@Getter
+@Setter
 @Table(name = "course_schedule")
 @Getter
 @Setter
@@ -31,6 +35,7 @@ public class CourseSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
 
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime courseStart;
@@ -41,8 +46,8 @@ public class CourseSchedule {
     @Enumerated(EnumType.STRING)
     private Day day;
 
-    @OneToMany(mappedBy = "courseSchedule", cascade = CascadeType.ALL)
-    private List<Course> courses;
+    @ManyToOne
+    private Course course;
 
     @Override
     public String toString() {
