@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Site Tittle -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course Single Left Sidebar</title>
+
+    <!-- Plugins css Style -->
+    <link href='/admin/plugins/fontawesome-5.15.2/css/all.min.css' rel='stylesheet'>
+    <link href='/admin/plugins/fontawesome-5.15.2/css/fontawesome.min.css' rel='stylesheet'>
+    <link href='/admin/plugins/animate/animate.css' rel='stylesheet'>
+
+
+    <!-- Fonts -->
+    <link href="css?family=Dosis:300,400,600,700|Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Custom css -->
+    <link href="/admin/css/kidz.css" id="option_style" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link href="/admin/img/favicon.png" rel="shortcut icon">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body id="body" class="up-scroll" data-bs-spy="scroll" data-bs-target=".element-right-sidebar" data-bs-offset="0">
+<!-- ====================================
+——— HEADER
+===================================== -->
+<header th:replace="fragment/headerFragment::header"></header>
+<div class="main-wrapper course-single-left-sidebar">
+
+
+    <!-- ====================================
+    ———	BREADCRUMB
+    ===================================== -->
+    <section class="breadcrumb-bg" style="background-image: url(/admin/img/background/page-title-bg-img.jpg); ">
+        <div class="container">
+            <div class="breadcrumb-holder">
+                <div>
+                    <h1 class="breadcrumb-title">Update SCHEDULE</h1>
+                    <ul class="breadcrumb breadcrumb-transparent">
+                        <li class="breadcrumb-item">
+                            <a class="text-white" href="/admin/home">Home</a>
+                        </li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">
+                            Update schedule
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================
+    ———	COURSES SECTION
+    ===================================== -->
+    <section class="py-8 pt-md-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8 order-md-1">
+
+                </div>
+
+
+                <div class="col-lg-3 col-md-4">
+                    <form method="post" action="/admin/courseScheduleUpdate" justify-content="center">
+
+                        <div class="pb-4 mb-2">
+                            <div class="section-title bg-primary rounded-top">
+                                <h3 class="text-capitalize text-white font-weight-bold py-2 ps-3 mb-0">Schedule</h3>
+                            </div>
+                            <input type="hidden" th:value="${courseSchedule.id}" name="id">
+
+                            <div class="border border-top-0 rounded-bottom">
+                                <div class="media p-3 border-bottom">
+                                    <div class="icon-rounded-circle-medium me-3 bg-success">
+                                        <i class="fa fa-calendar text-white" aria-hiden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="text-uppercase text-success mt-0 font-weight-bold">course name</h4>
+                                        <select name="course" >
+                                            <option th:each="course: ${allCourse}" th:text="${course.courseName}"
+                                                    th:value="${course.id}" th:selected="${course.courseName == courseSchedule.getCourse().courseName}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="media p-3 border-bottom">
+                                    <div class="icon-rounded-circle-medium me-3 bg-success">
+                                        <i class="fa fa-calendar text-white" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="text-uppercase text-success mt-0 font-weight-bold">course start
+                                        </h4>
+                                        <input type="time" name="courseStart" th:value="${courseSchedule.getCourseStart()}">
+                                    </div>
+                                </div>
+
+                                <div class="media p-3 border-bottom">
+                                    <div class="media p-3 border-bottom">
+                                        <div class="icon-rounded-circle-medium me-3 bg-success">
+                                            <i class="fa fa-calendar text-white" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="text-uppercase text-success mt-0 font-weight-bold">course end
+                                            </h4>
+                                            <input type="time" name="courseEnd" th:value="${courseSchedule.getCourseEnd()}">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="media p-3 pe-md-2 pe-lg-1 pe-xl-3">
+                                    <div class="icon-rounded-circle-medium me-3 bg-pink">
+                                        <i class="far fa-money-bill-alt text-white" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="text-uppercase text-pink mt-0 font-weight-bold">
+                                            DAY
+                                        </h4>
+                                        <select id="day" name="day" >
+                                            <option th:text="MONDAY" th:value="MONDAY" th:selected="${courseSchedule.getDay().toString().equals('MONDAY')}" ></option>
+                                            <option th:text="TUESDAY" th:value="TUESDAY" th:selected="${courseSchedule.getDay().toString().equals('TUESDAY')}"  ></option>
+                                            <option th:text="WEDNESDAY" th:value="WEDNESDAY" th:selected="${courseSchedule.getDay().toString().equals('WEDNESDAY')}"></option>
+                                            <option th:text="THURSDAY" th:value="THURSDAY" th:selected="${courseSchedule.getDay().toString().equals('THURSDAY')}" ></option>
+                                            <option th:text="FRIDAY" th:value="FRIDAY" th:selected="${courseSchedule.getDay().toString().equals('FRIDAY')}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="text-center mb-6">
+                                <input type="submit" name="add" class="btn btn-pink text-white text-uppercase w-100"
+                                       data-bs-toggle="modal"/>
+                                </input>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div> <!-- element wrapper ends -->
+
+<!-- ====================================
+———	FOOTER
+===================================== -->
+<footer th:replace="fragment/footerFragment::footer"></footer>
+
+<!-- Modal Login -->
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="bg-warning rounded-top p-2">
+                <h3 class="text-white font-weight-bold mb-0 ms-2">Login</h3>
+            </div>
+
+            <div class="rounded-bottom-md border-top-0">
+                <div class="p-3">
+                    <form action="#" method="POST" role="form">
+                        <div class="form-group form-group-icon">
+                            <input type="text" class="form-control border" placeholder="User name" required="">
+                        </div>
+
+                        <div class="form-group form-group-icon">
+                            <input type="password" class="form-control border" placeholder="Password" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger text-uppercase w-100">Log In</button>
+                        </div>
+
+                        <div class="form-group text-center text-secondary mb-0">
+                            <a class="text-danger" href="javascript:void(0)">Forgot password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Create Account -->
+
+
+<!-- Modal Enroll -->
+
+
+<!-- Modal Products -->
+
+
+<!--scrolling-->
+<div class="">
+    <a href="#pageTop" class="back-to-top" id="back-to-top" style="opacity: 1;">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+<!-- Javascript -->
+<script src='/admin/plugins/jquery/jquery.min.js'></script>
+<script src='/admin/plugins/bootstrap/js/bootstrap.bundle.min.js'></script>
+
+
+<script src='/admin/plugins/lazyestload/lazyestload.js'></script>
+<script src='/admin/plugins/velocity/velocity.min.js'></script>
+<script src='/admin/plugins/smoothscroll/SmoothScroll.js'></script>
+
+
+<!-- Load revolution slider only on Local File Systems. The following part can be removed on Server -->
+<!--
+<script src='/admin/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js'></script>
+<script src='/admin/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js'></script>
+<script src='/admin/plugins/revolution/js/extensions/revolution.extension.navigation.min.js'></script>
+-->
+
+<script src='/admin/plugins/wow/wow.min.js'></script>
+
+<script>
+    var d = new Date();
+    var year = d.getFullYear();
+    document.getElementById("copy-year").innerHTML = year;
+</script>
+<script src='/admin/js/kidz.js'></script>
+<link href="/admin/options/optionswitch.css" rel="stylesheet">
+<script src="/admin/options/optionswitcher.js"></script>
+</body>
+
+</html>
+

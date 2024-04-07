@@ -25,9 +25,9 @@ import java.time.LocalTime;
 
 @Entity
 @EqualsAndHashCode
+@Table(name = "course_schedule")
 @Getter
 @Setter
-@Table(name = "course_schedule")
 public class CourseSchedule {
 
     @Id
