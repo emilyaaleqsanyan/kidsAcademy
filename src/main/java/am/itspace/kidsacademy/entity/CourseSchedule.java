@@ -25,8 +25,6 @@ import java.time.LocalTime;
 
 @Entity
 @EqualsAndHashCode
-@Getter
-@Setter
 @Table(name = "course_schedule")
 @Getter
 @Setter
