@@ -2,6 +2,7 @@ package am.itspace.kidsacademy.service.impl;
 
 import am.itspace.kidsacademy.entity.User;
 import am.itspace.kidsacademy.entity.enums.UserType;
+import am.itspace.kidsacademy.exception.ProblemFoundException;
 import am.itspace.kidsacademy.repository.UserRepository;
 import am.itspace.kidsacademy.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElse(null);
+                .orElseThrow(() -> new ProblemFoundException());
     }
 
     @Override

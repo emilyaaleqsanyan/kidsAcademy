@@ -26,8 +26,8 @@ public class GlobalExceptionHandler {
         return "admin/error";
     }
 
-    @ExceptionHandler(value = OwnCustomException.class)
-    public String ownExceptionHandler(OwnCustomException ex) {
+    @ExceptionHandler(value = ProblemFoundException.class)
+    public String ownExceptionHandler(ProblemFoundException ex) {
 
         return "admin/error";
     }

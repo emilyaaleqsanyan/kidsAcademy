@@ -43,7 +43,7 @@ public class PictureServiceImpl implements PictureService {
         modelMap.addAttribute("pageNumbers", pageNumbers);
 
 
-        return pictureRepository.findAll(pageable);
+        return picturePage;
     }
 
     @Override
