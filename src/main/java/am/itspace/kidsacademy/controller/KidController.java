@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KidController {
 
     private final KidService kidService;
-    private final CourseService courseService;
 
 
     @PostMapping("/user/courseRegister")

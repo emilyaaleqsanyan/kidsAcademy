@@ -10,23 +10,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-
 @Controller
 @RequiredArgsConstructor
 public class MainController {
     private final PictureService pictureService;
 
     @GetMapping("/")
-    public String mainPage(ModelMap modelMap) {
+    public String mainPage() {
         return "user/home";
     }
 
 
     @GetMapping("/gallery")
     public String userGalleryPage(@PageableDefault(size = 4, page = 1) Pageable page, ModelMap modelMap) {
-
-        pictureService.findAll(page,modelMap);
-
+        pictureService.findAll(page, modelMap);
         return "user/gallery";
     }
 
@@ -38,7 +35,6 @@ public class MainController {
 
     @GetMapping("/news")
     public String newsPage() {
-
         return "user/news";
     }
 

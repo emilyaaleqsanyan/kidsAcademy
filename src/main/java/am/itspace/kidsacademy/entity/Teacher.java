@@ -24,18 +24,14 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
-
     private String surname;
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
-
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "teacher")
     @JoinColumn(name = "pic_name")
     private Photo photo;
-
     private String information;
 
 

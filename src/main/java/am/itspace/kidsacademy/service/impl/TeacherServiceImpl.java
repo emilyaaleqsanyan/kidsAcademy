@@ -2,6 +2,7 @@ package am.itspace.kidsacademy.service.impl;
 
 import am.itspace.kidsacademy.entity.Photo;
 import am.itspace.kidsacademy.entity.Teacher;
+import am.itspace.kidsacademy.exception.ProblemFoundException;
 import am.itspace.kidsacademy.repository.CourseRepository;
 import am.itspace.kidsacademy.repository.PhotoRepository;
 import am.itspace.kidsacademy.repository.TeacherRepository;
@@ -56,7 +57,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher findById(int id, ModelMap modelMap) {
-        Teacher byId = teacherRepository.findById(id).orElseThrow();
+        Teacher byId = teacherRepository.findById(id).orElseThrow(()-> new ProblemFoundException());
         modelMap.addAttribute("teacher", byId);
         modelMap.addAttribute("courses", courseRepository.findAll());
         return byId;

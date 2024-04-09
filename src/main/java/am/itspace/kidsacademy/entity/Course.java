@@ -2,8 +2,6 @@ package am.itspace.kidsacademy.entity;
 
 import am.itspace.kidsacademy.entity.enums.Currency;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;

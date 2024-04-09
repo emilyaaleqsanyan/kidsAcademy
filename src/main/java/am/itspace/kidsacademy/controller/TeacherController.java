@@ -2,10 +2,7 @@ package am.itspace.kidsacademy.controller;
 
 
 import am.itspace.kidsacademy.entity.Teacher;
-import am.itspace.kidsacademy.exception.GlobalExceptionHandler;
-import am.itspace.kidsacademy.exception.OwnCustomException;
-import am.itspace.kidsacademy.service.PhotoService;
-import am.itspace.kidsacademy.service.PictureService;
+import am.itspace.kidsacademy.exception.ProblemFoundException;
 import am.itspace.kidsacademy.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
@@ -35,9 +32,6 @@ public class TeacherController {
     private String uploadDirectory;
 
     private final TeacherService teacherService;
-    private final PhotoService photoService;
-    private  final GlobalExceptionHandler globalExceptionHandler;
-    private final PictureService pictureService;
 
 
     @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
@@ -48,9 +42,9 @@ public class TeacherController {
                 return IOUtils.toByteArray(new FileInputStream(file));
             }
         } catch (FileNotFoundException ex) {
-     throw  new OwnCustomException();
+     throw  new ProblemFoundException();
         } catch (IOException ex) {
-         throw new OwnCustomException();
+         throw new ProblemFoundException();
         }
         return new byte[0];
     }
