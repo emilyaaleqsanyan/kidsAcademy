@@ -7,6 +7,7 @@ import am.itspace.kidsacademy.repository.CourseScheduleRepository;
 import am.itspace.kidsacademy.service.CourseService;
 import am.itspace.kidsacademy.service.TeacherService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService {
@@ -42,12 +44,16 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course save(Course course) {
-        return courseRepository.save(course);
+        Course save = courseRepository.save(course);
+        log.info("Saved: " + save.getCourseName());
+        return save;
     }
 
     @Override
     public Page<Course> findAll(Pageable pageable) {
-        return courseRepository.findAll(pageable);
+        Page<Course> all = courseRepository.findAll(pageable);
+        log.info("Found " + all.getTotalElements() + ", " + all.getTotalPages());
+        return all;
     }
 
     @Override
@@ -61,19 +67,27 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course findById(int id) {
-        return courseRepository.findById(id).orElse(null);
+        Optional<Course> byId = courseRepository.findById(id);
+        if(byId.isPresent()){
+            log.info("Found " + byId.get().getCourseName());
+            return byId.get();
+        }
+        return null;
     }
 
     @Override
     public void findAllAndAddToModelMap(ModelMap modelMap) {
         List<Course> allCourse = courseRepository.findAll();
+        log.info("Found " + allCourse.size() + " " + "courses");
         modelMap.addAttribute("allCourse", allCourse);
     }
 
 
     @Override
     public Course update(Course course) {
-        return courseRepository.save(course);
+        Course save = courseRepository.save(course);
+        log.info("Updated: " + save.getCourseName());
+        return save;
     }
 
     @Override
@@ -84,7 +98,9 @@ public class CourseServiceImpl implements CourseService {
             List<CourseSchedule> courseScheduleList = course.getCourseScheduleList();
 
             courseScheduleRepository.deleteAll(courseScheduleList);
+            log.info("Deleted: " + courseScheduleList.size() + " courseSchedule");
             courseRepository.deleteById(course.getId());
+            log.info("Deleted course by id: " + course.getId() + "/ " + course.getCourseName());
         }
     }
 

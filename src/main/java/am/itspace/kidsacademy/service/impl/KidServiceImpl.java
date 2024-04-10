@@ -50,6 +50,9 @@ public class KidServiceImpl implements KidService {
     public String kidPage(ModelMap modelMap, SpringUser springUser) {
         List<Kid> kids = kidRepository.findAll();
         List<Kid> userKids = new ArrayList<>();
+        if(springUser == null){
+            return "redirect:/loginPage";
+        }
         if (springUser.getUser().getUserType() == UserType.USER) {
             for (Kid kid : kids) {
                 if (kid.getUser().getId() == springUser.getUser().getId()) {
