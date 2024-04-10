@@ -27,4 +27,12 @@ kidsAcademy1:
       upload:
         directory: /Users/armenuhiyeghoyan/IdeaProjects/kidsAcademy1/uploadDirectory
 
+logging:
+  file:
+    name: C:\Users\Lenovo\spring\kidsAcademy\logs\kidsAcademy-%d{yyyy-MM-dd-HH-mm-ss}.%i.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+  level:
+    root: info
 
